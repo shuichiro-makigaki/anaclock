@@ -1,0 +1,20 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="screen" type="text/css" href="lib/colorpicker/css/colorpicker.css" />
+  <script type="text/javascript" src="lib/colorpicker/js/jquery.js"></script>
+  <script type="text/javascript" src="lib/colorpicker/js/colorpicker.js"></script>
+</head>
+<body>
+  <p id="picker1"></p>
+<script>
+$('#picker1').ColorPicker({
+  flat: true,
+  onChange: function (hsb, hex, rgb) {
+    var str = "rgb(" + rgb["r"] + "," + rgb["g"] + "," + rgb["b"] + ")";
+    chrome.storage.local.set({"color1": str});
+	}
+});
+</script>
+</body>
+</html>
