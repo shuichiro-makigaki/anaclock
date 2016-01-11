@@ -6,15 +6,17 @@
   <script type="text/javascript" src="lib/colorpicker/js/colorpicker.js"></script>
 </head>
 <body>
-  <p id="picker1"></p>
-<script>
-$('#picker1').ColorPicker({
-  flat: true,
-  onChange: function (hsb, hex, rgb) {
-    var str = "rgb(" + rgb["r"] + "," + rgb["g"] + "," + rgb["b"] + ")";
-    chrome.storage.local.set({"color1": str});
-	}
-});
+  <p id="picker1" style="width:400px;height:200px"></p>
+<script type="text/javascript">
+chrome.storage.local.get("color1", function(items){
+  $('#picker1').ColorPicker({
+    color: JSON.parse(items["color1"]),
+    flat: true,
+    onChange: function (hsb, hex, rgb) {
+      chrome.storage.local.set({"color1": JSON.stringify(rgb)});
+	   }
+   });
+ });
 </script>
 </body>
 </html>

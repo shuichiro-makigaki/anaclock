@@ -18,40 +18,36 @@ function anaclock() {
     ctx.save();
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = items["color1"];
+    var scolor = JSON.parse(items["color1"]);
+    ctx.strokeStyle = "rgb("+scolor["r"]+","+scolor["g"]+","+scolor["b"]+")";
     ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
     ctx.shadowBlur = 3;
     ctx.shadowOffsetX = 2;
     ctx.shadowOffsetY = 2;
+    // Time
     ctx.beginPath();
-    ctx.moveTo(10, 0);
-    ctx.lineTo(10, 2);
-    ctx.moveTo(20, 10);
-    ctx.lineTo(18, 10);
-    ctx.moveTo(10, 20);
-    ctx.lineTo(10, 18);
-    ctx.moveTo(0, 10);
-    ctx.lineTo(2, 10);
+    ctx.moveTo(10, 0); ctx.lineTo(10, 2);
+    ctx.moveTo(20, 10); ctx.lineTo(18, 10);
+    ctx.moveTo(10, 20); ctx.lineTo(10, 18);
+    ctx.moveTo(0, 10); ctx.lineTo(2, 10);
     ctx.stroke();
 
-    ctx.translate(
-      Math.ceil(canvas.width / 2),
-      Math.ceil(canvas.height / 2)
-    );
+    ctx.translate(Math.ceil(canvas.width / 2), Math.ceil(canvas.height / 2));
 
-    ctx.moveTo(0, 0);
+    // Short hand
     rad = 2 * Math.PI / 12 * h + 2 * Math.PI / 12 / 60 * m - Math.PI / 2;
-    ctx.rotate(rad);
-    ctx.lineTo(6, 0);
-    ctx.rotate(rad * -1);
-
     ctx.moveTo(0, 0);
+    ctx.lineTo(Math.ceil(6 * Math.cos(rad)), Math.ceil(6 * Math.sin(rad)));
+    ctx.moveTo(0, 0);
+    ctx.lineTo(Math.ceil(4 * Math.cos(rad+Math.PI)), Math.ceil(4 * Math.sin(rad+Math.PI)));
+    ctx.stroke();
+
+    // Long hand
     rad = 2 * Math.PI / 60 * m - Math.PI / 2;
-    ctx.rotate(rad);
-    ctx.lineTo(8, 0);
-    ctx.rotate(rad * -1);
-
     ctx.moveTo(0, 0);
+    ctx.lineTo(Math.ceil(10 * Math.cos(rad)), Math.ceil(10 * Math.sin(rad)));
+    ctx.moveTo(0, 0);
+    ctx.lineTo(Math.ceil(4 * Math.cos(rad+Math.PI)), Math.ceil(4 * Math.sin(rad+Math.PI)));
     ctx.stroke();
 
     ctx.restore();
@@ -63,7 +59,7 @@ function anaclock() {
 }
 
 anaclock();
-setInterval(anaclock, 1000);
+setInterval(anaclock, 500);
 
 </script>
 </body>
