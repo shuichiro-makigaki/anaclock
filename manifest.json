@@ -1,5 +1,5 @@
 {
-  "description": "Analog Clock",
+  "description": "Analog clock on toolbar",
   "name": "anaclock",
   "version": "1.0",
   "manifest_version": 2,
