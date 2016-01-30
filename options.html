@@ -8,9 +8,14 @@
 <body>
   <p id="picker1" style="width:400px;height:200px"></p>
 <script type="text/javascript">
+'use strict';
 chrome.storage.local.get("color1", function(items){
+  var color1 = {"r":0, "g":0, "b":0};
+  try {
+    color1 = JSON.parse(items["color1"])
+  } catch(e) {}
   $('#picker1').ColorPicker({
-    color: JSON.parse(items["color1"]),
+    color: color1,
     flat: true,
     onChange: function (hsb, hex, rgb) {
       chrome.storage.local.set({"color1": JSON.stringify(rgb)});
