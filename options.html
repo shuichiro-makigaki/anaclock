@@ -6,21 +6,45 @@
   <script type="text/javascript" src="lib/colorpicker/js/colorpicker.js"></script>
 </head>
 <body>
-  <p id="picker1" style="width:400px;height:200px"></p>
+  針
+  <p id="hand-color" style="width:400px;height:200px"></p>
+  背景
+  <p id="bg-color" style="width:400px;height:200px"></p>
 <script type="text/javascript">
 'use strict';
-chrome.storage.local.get("color1", function(items){
-  var color1 = {"r":0, "g":0, "b":0};
+
+chrome.storage.local.get("conf", function(items){
+  var conf = {
+    "hand": {
+      "color": {"r": 0, "g": 0, "b": 0}
+    },
+    "background": {
+      "shape": "square",
+      "color": {"r":0,"g":0,"b":0}
+    }
+  };
+
   try {
-    color1 = JSON.parse(items["color1"])
+    conf = JSON.parse(items["conf"]);
   } catch(e) {}
-  $('#picker1').ColorPicker({
-    color: color1,
+
+  $('#hand-color').ColorPicker({
+    color: conf["hand"]["color"],
     flat: true,
     onChange: function (hsb, hex, rgb) {
-      chrome.storage.local.set({"color1": JSON.stringify(rgb)});
+      conf["hand"]["color"] = rgb;
+      chrome.storage.local.set({"conf": JSON.stringify(conf)});
 	   }
    });
+
+  $('#bg-color').ColorPicker({
+     color: conf["background"]["color"],
+     flat: true,
+     onChange: function (hsb, hex, rgb) {
+       conf["background"]["color"] = rgb;
+       chrome.storage.local.set({"conf": JSON.stringify(conf)});
+     }
+    });
  });
 </script>
 </body>
