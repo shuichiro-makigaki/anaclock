@@ -7,7 +7,9 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('all', function() {
-  gulp.src(['anaclock.html', 'anaclock.js', 'manifest.json', 'options.html', 'lib/**'], { base: './' })
+  gulp.src(['anaclock.html', 'anaclock.js', 'manifest.json', 'options.html', 'lib/**'], {
+      base: './'
+    })
     .pipe(zip('anaclock.xpi'))
     .pipe(gulp.dest('./'));
 });

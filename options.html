@@ -3,16 +3,30 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link rel="stylesheet" media="screen" type="text/css" href="lib/colorpicker/css/colorpicker.css" />
+  <link rel="stylesheet" href="https://cdn.rawgit.com/alexanderGugel/papier/master/dist/papier.min.css">
   <script type="text/javascript" src="lib/colorpicker/js/jquery.js"></script>
   <script type="text/javascript" src="lib/colorpicker/js/colorpicker.js"></script>
   <script type="text/javascript" src="anaclock.js"></script>
 </head>
 
 <body>
-  針
-  <p id="hand-color" style="width:400px;height:200px"></p>
-  文字盤
-  <p id="bg-color" style="width:400px;height:200px"></p>
+  <ul class="tabs bg-grey">
+    <li><a href="#">Config</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+  <section class="panel">
+    <header class="bg-subtle">針</header>
+    <main>
+      <p id="hand-color" style="width:400px;height:200px;"></p>
+    </main>
+  </section>
+  <section class="panel">
+    <header class="bg-subtle">文字盤</header>
+    <main>
+      <p id="bg-color" style="width:400px;height:200px;"></p>
+    </main>
+  </section>
+
   <script type="text/javascript">
     options();
   </script>
