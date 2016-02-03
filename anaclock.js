@@ -28,6 +28,8 @@ function drawClock(items) {
   if (h > 12) h -= 12;
   var rad = 0;
 
+  browser.browserAction.setTitle({"title":d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate()+" "+h+":"+m});
+
   try {
     conf = JSON.parse(items["conf"]);
   } catch (e) {}
