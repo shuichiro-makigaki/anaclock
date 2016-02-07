@@ -25,10 +25,19 @@ function drawClock(items) {
   var s = d.getSeconds();
   var m = d.getMinutes();
   var h = d.getHours();
-  if (h > 12) h -= 12;
   var rad = 0;
 
-  browser.browserAction.setTitle({"title":d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate()+" "+h+":"+m});
+  var str_mon = d.getMonth() + 1;
+  var str_d = d.getDate();
+  var str_h = h;
+  var str_m = m;
+  if (str_mon < 10) str_mon = "0" + str_mon;
+  if (str_d < 10) str_d = "0" + str_d;
+  if (h < 10) str_h = "0" + h;
+  if (m < 10) str_m = "0" + m;
+  browser.browserAction.setTitle({"title":d.getFullYear()+"/"+str_mon+"/"+str_d+" "+str_h+":"+str_m});
+
+  if (h > 12) h -= 12;
 
   try {
     conf = JSON.parse(items["conf"]);
