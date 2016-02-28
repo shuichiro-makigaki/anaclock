@@ -1,19 +1,19 @@
 'use strict';
 
 var conf = {
-  "hand": {
-    "color": {
-      "r": 0,
-      "g": 0,
-      "b": 0
+  hand: {
+    color: {
+      r: 0,
+      g: 0,
+      b: 0
     }
   },
-  "background": {
-    "shape": "square",
-    "color": {
-      "r": 0,
-      "g": 0,
-      "b": 0
+  background: {
+    shape: "square",
+    color: {
+      r: 254,
+      g: 254,
+      b: 254
     }
   }
 };
@@ -35,12 +35,14 @@ function drawClock(items) {
   if (str_d < 10) str_d = "0" + str_d;
   if (h < 10) str_h = "0" + h;
   if (m < 10) str_m = "0" + m;
-  browser.browserAction.setTitle({"title":d.getFullYear()+"/"+str_mon+"/"+str_d+" "+str_h+":"+str_m});
+  browser.browserAction.setTitle({
+    title: d.getFullYear() + "-" + str_mon + "-" + str_d + " " + str_h + ":" + str_m
+  });
 
   if (h > 12) h -= 12;
 
   try {
-    conf = JSON.parse(items["conf"]);
+    conf = JSON.parse(items.conf);
   } catch (e) {}
 
   ctx.save();
@@ -86,43 +88,43 @@ function drawClock(items) {
   ctx.restore();
 
   chrome.browserAction.setIcon({
-    "imageData": ctx.getImageData(0, 0, canvas.width, canvas.height)
+    imageData: ctx.getImageData(0, 0, canvas.width, canvas.height)
   });
 }
 
 
 function saveOptions(items) {
   try {
-    conf = JSON.parse(items["conf"]);
+    conf = JSON.parse(items.conf);
   } catch (e) {}
 
   $('#hand-color').ColorPicker({
-    color: conf["hand"]["color"],
+    color: conf.hand.color,
     flat: true,
     onChange: function(hsb, hex, rgb) {
-      conf["hand"]["color"] = rgb;
+      conf.hand.color = rgb;
       chrome.storage.local.set({
-        "conf": JSON.stringify(conf)
+        conf: JSON.stringify(conf)
       });
     }
   });
 
   $('#bg-color').ColorPicker({
-    color: conf["background"]["color"],
+    color: conf.background.color,
     flat: true,
     onChange: function(hsb, hex, rgb) {
-      conf["background"]["color"] = rgb;
+      conf.background.color = rgb;
       chrome.storage.local.set({
-        "conf": JSON.stringify(conf)
+        conf: JSON.stringify(conf)
       });
     }
   });
 }
 
 function anaclock() {
-  chrome.storage.local.get("conf", drawClock);
+  chrome.storage.local.get(null, drawClock);
 }
 
 function options() {
-  chrome.storage.local.get("conf", saveOptions);
+  chrome.storage.local.get(null, saveOptions);
 }
