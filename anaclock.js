@@ -1,19 +1,23 @@
 'use strict';
 
+chrome.storage.local.set({
+  "status": "running"
+});
+
 var conf = {
-  hand: {
-    color: {
-      r: 0,
-      g: 0,
-      b: 0
+  "hand": {
+    "color": {
+      "r": 0,
+      "g": 0,
+      "b": 0
     }
   },
-  background: {
-    shape: "square",
-    color: {
-      r: 254,
-      g: 254,
-      b: 254
+  "background": {
+    "shape": "square",
+    "color": {
+      "r": 254,
+      "g": 254,
+      "b": 254
     }
   }
 };
@@ -41,21 +45,22 @@ function drawClock(items) {
 
   if (h > 12) h -= 12;
 
-  try {
-    conf = JSON.parse(items.conf);
-  } catch (e) {}
-
+  if (!(typeof items["conf"] === "undefined")) {
+    try {
+      conf = JSON.parse(items["conf"]);
+    } catch (e) {}
+  }
   ctx.save();
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   // Background
-  ctx.fillStyle = "rgb(" + conf.background.color.r + "," + conf.background.color.g + "," + conf.background.color.b + ")";
+  ctx.fillStyle = "rgb(" + conf["background"]["color"]["r"] + "," + conf["background"]["color"]["g"] + "," + conf["background"]["color"]["b"] + ")";
   ctx.beginPath();
   ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 2, 0, Math.PI * 2, false);
   ctx.fill();
 
   // Face
-  ctx.strokeStyle = "rgb(" + conf.hand.color.r + "," + conf.hand.color.g + "," + conf.hand.color.b + ")";
+  ctx.strokeStyle = "rgb(" + conf["hand"]["color"]["r"] + "," + conf["hand"]["color"]["g"] + "," + conf["hand"]["color"]["b"] + ")";
   ctx.beginPath();
   ctx.moveTo(9, 0);
   ctx.lineTo(9, 1);
@@ -94,28 +99,30 @@ function drawClock(items) {
 
 
 function saveOptions(items) {
-  try {
-    conf = JSON.parse(items.conf);
-  } catch (e) {}
+  if (!(typeof items["conf"] === "undefined")) {
+    try {
+      conf = JSON.parse(items["conf"]);
+    } catch (e) {}
+  }
 
   $('#hand-color').ColorPicker({
-    color: conf.hand.color,
+    color: conf["hand"]["color"],
     flat: true,
     onChange: function(hsb, hex, rgb) {
-      conf.hand.color = rgb;
+      conf["hand"]["color"] = rgb;
       chrome.storage.local.set({
-        conf: JSON.stringify(conf)
+        "conf": JSON.stringify(conf)
       });
     }
   });
 
   $('#bg-color').ColorPicker({
-    color: conf.background.color,
+    color: conf["background"]["color"],
     flat: true,
     onChange: function(hsb, hex, rgb) {
-      conf.background.color = rgb;
+      conf["background"]["color"] = rgb;
       chrome.storage.local.set({
-        conf: JSON.stringify(conf)
+        "conf": JSON.stringify(conf)
       });
     }
   });
