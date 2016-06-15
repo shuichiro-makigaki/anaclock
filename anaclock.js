@@ -1,27 +1,5 @@
 'use strict';
 
-chrome.storage.local.set({
-  "status": "running"
-});
-
-var conf = {
-  "hand": {
-    "color": {
-      "r": 0,
-      "g": 0,
-      "b": 0
-    }
-  },
-  "background": {
-    "shape": "square",
-    "color": {
-      "r": 254,
-      "g": 254,
-      "b": 254
-    }
-  }
-};
-
 function drawClock(items) {
   var canvas = document.getElementById('canvas');
   var ctx = canvas.getContext('2d');
@@ -97,41 +75,11 @@ function drawClock(items) {
   });
 }
 
-
-function saveOptions(items) {
-  if (!(typeof items["conf"] === "undefined")) {
-    try {
-      conf = JSON.parse(items["conf"]);
-    } catch (e) {}
-  }
-
-  $('#hand-color').ColorPicker({
-    color: conf["hand"]["color"],
-    flat: true,
-    onChange: function(hsb, hex, rgb) {
-      conf["hand"]["color"] = rgb;
-      chrome.storage.local.set({
-        "conf": JSON.stringify(conf)
-      });
-    }
-  });
-
-  $('#bg-color').ColorPicker({
-    color: conf["background"]["color"],
-    flat: true,
-    onChange: function(hsb, hex, rgb) {
-      conf["background"]["color"] = rgb;
-      chrome.storage.local.set({
-        "conf": JSON.stringify(conf)
-      });
-    }
-  });
-}
-
 function anaclock() {
   chrome.storage.local.get(null, drawClock);
 }
 
-function options() {
-  chrome.storage.local.get(null, saveOptions);
-}
+anaclock();
+setInterval(function () {
+  anaclock()
+}, 1000);
