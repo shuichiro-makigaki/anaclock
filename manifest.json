@@ -1,7 +1,7 @@
 {
   "description": "Simple analog clock on toolbar",
   "name": "Analog Clock",
-  "version": "1.5",
+  "version": "1.6",
   "manifest_version": 2,
 
   "applications": {

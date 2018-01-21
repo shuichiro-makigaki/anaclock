@@ -12,6 +12,13 @@ var conf = {
       "b": 0
     }
   },
+  "short-hand": {
+    "color": {
+      "r": 0,
+      "g": 0,
+      "b": 0
+    }
+  },
   "background": {
     "shape": "square",
     "color": {
@@ -19,5 +26,15 @@ var conf = {
       "g": 254,
       "b": 254
     }
+  },
+  "dot": {
+    "color": {
+      "r": 0,
+      "g": 0,
+      "b": 0
+    }
+  },
+  "title": {
+    "format": "Y-MM-DD (ddd) HH:mm"
   }
 };

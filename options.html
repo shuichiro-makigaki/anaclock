@@ -8,22 +8,41 @@
 
   <body>
     <section class="panel" style="margin:5px">
-      <header class="bg-subtle">Handle color</header>
+      <header class="bg-subtle">Hand color (Long)</header>
       <main>
         <p id="hand-color" style="width:375px;height:180px;"></p>
       </main>
     </section>
     <section class="panel" style="margin:5px">
-      <header class="bg-subtle">Face color</header>
+      <header class="bg-subtle">Hand color (Short)</header>
+      <main>
+        <p id="short-hand-color" style="width:375px;height:180px;"></p>
+      </main>
+    </section>
+    <section class="panel" style="margin:5px">
+      <header class="bg-subtle">Face color (Background)</header>
       <main>
         <p id="bg-color" style="width:375px;height:180px;"></p>
+      </main>
+    </section>
+    <section class="panel" style="margin:5px">
+      <header class="bg-subtle">Face color (Dot)</header>
+      <main>
+        <p id="dot-color" style="width:375px;height:180px;"></p>
+      </main>
+    </section>
+    <section class="panel" style="margin:5px">
+      <header class="bg-subtle">Title Format</header>
+      <main>
+        <input type="text" id="title-format" style="width:365px;">
+        <p><a href="https://momentjs.com/docs/#/displaying/format/">Supported Format</a></p>
       </main>
     </section>
     <section class="panel" style="margin:5px">
       <header class="bg-subtle">About</header>
       <main>
         <dl>
-          <dt>ColorPicker</dt>
+          <dt>Color Picker</dt>
           <dd>
             <a href="http://www.eyecon.ro/colorpicker/" target="_blank">Color Picker - jQuery plugin</a>
           </dd>
@@ -37,8 +56,9 @@
 
   </body>
 
-  <script type="text/javascript" src="lib/jquery-2.2.1.min.js"></script>
+  <script type="text/javascript" src="lib/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="lib/colorpicker/js/colorpicker.js"></script>
+  <script type="text/javascript" src="lib/moment.js"></script>
   <script type="text/javascript" src="common.js"></script>
   <script type="text/javascript" src="options.js"></script>
 
